@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import { HeaderContainer } from './styled'
 import {
@@ -9,44 +9,83 @@ import {
 const { SubMenu } = Menu
 const { Header, Content, Sider } = Layout
 class App extends Component {
+  constructor() {
+    super()
+    this.BreadcrumbItems = []
+  }
+
   render() {
+    const MenuData = [
+      {
+        key: 'sub1',
+        title: 'subnav 1',
+        icon: <UserOutlined />,
+        items: [
+          { key: 1, title: 'option1' },
+          { key: 2, title: 'option2' },
+          { key: 3, title: 'option3' },
+          { key: 4, title: 'option4' },
+        ],
+      },
+      {
+        key: 'sub2',
+        title: 'subnav 2',
+        icon: <LaptopOutlined />,
+        items: [
+          { key: 5, title: 'option5' },
+          { key: 6, title: 'option6' },
+          { key: 7, title: 'option7' },
+          { key: 8, title: 'option8' },
+        ],
+      },
+      {
+        key: 'sub3',
+        title: 'subnav 3',
+        icon: <NotificationOutlined />,
+        items: [
+          { key: 9, title: 'option9' },
+          { key: 10, title: 'option10' },
+          { key: 11, title: 'option11' },
+          { key: 12, title: 'option12' },
+        ],
+      },
+    ]
+
+    const hanldMenuClick = ({ item, key, keyPath, domEvent }) => {
+      console.log('keyPath', { item, key, keyPath, domEvent })
+    }
+
+    const menuItem = (items) => {
+      return items.map(({ key, title }) => (
+        <Menu.Item key={key}>{title}</Menu.Item>
+      ))
+    }
+
+    const subMenuItems = MenuData.map(({ key, title, icon, items }) => (
+      <SubMenu key={key} icon={icon} title={title}>
+        {menuItem(items)}
+      </SubMenu>
+    ))
+
     return (
       <HeaderContainer>
         <Layout>
           <Header className="header">
-            <h2 className="logo">(ノ▽｀*)ノ[你回来啦♪]=з=з=з</h2>
-            <div className="user">用户名</div>
+            <div className="header-content">
+              <span className="logo">(ノ▽｀*)ノ[你回来啦♪]=з=з=з</span>
+              <span className="user">admin</span>
+            </div>
           </Header>
           <Layout>
             <Sider width={200} className="site-layout-background">
               <Menu
                 mode="inline"
+                onClick={hanldMenuClick}
                 defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
                 style={{ height: '100%', borderRight: 0 }}
               >
-                <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  icon={<NotificationOutlined />}
-                  title="subnav 3"
-                >
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu>
+                {subMenuItems}
               </Menu>
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>

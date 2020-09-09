@@ -5,9 +5,18 @@ const HeaderContainer = styled.div`
     height: calc(100vh - 64px);
   }
 
-  .logo,
-  .user {
+  .header-content {
     color: #fff;
+    span {
+      color: #fff;
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    .user {
+      float: right;
+      margin-right: 20px;
+    }
   }
 `
 export { HeaderContainer }
