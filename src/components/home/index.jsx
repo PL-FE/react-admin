@@ -1,4 +1,7 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
+import { renderRoutes } from 'react-router-config'
+import { Link } from 'react-router-dom'
+import routes from '@/router/index.js'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import { HeaderContainer } from './styled'
 import {
@@ -17,37 +20,28 @@ class App extends Component {
   render() {
     const MenuData = [
       {
-        key: 'sub1',
-        title: 'subnav 1',
+        key: '/home',
+        title: '首页',
         icon: <UserOutlined />,
-        items: [
-          { key: 1, title: 'option1' },
-          { key: 2, title: 'option2' },
-          { key: 3, title: 'option3' },
-          { key: 4, title: 'option4' },
-        ],
+        items: [{ key: '/iconView', title: '图标' }],
       },
       {
-        key: 'sub2',
-        title: 'subnav 2',
+        key: '/components',
+        title: '组件',
         icon: <LaptopOutlined />,
-        items: [
-          { key: 5, title: 'option5' },
-          { key: 6, title: 'option6' },
-          { key: 7, title: 'option7' },
-          { key: 8, title: 'option8' },
-        ],
+        items: [{ key: '/ant', title: 'ant' }],
       },
       {
-        key: 'sub3',
-        title: 'subnav 3',
+        key: '/plugins',
+        title: '插件',
         icon: <NotificationOutlined />,
-        items: [
-          { key: 9, title: 'option9' },
-          { key: 10, title: 'option10' },
-          { key: 11, title: 'option11' },
-          { key: 12, title: 'option12' },
-        ],
+        items: [],
+      },
+      {
+        key: '/404',
+        title: '404',
+        icon: <NotificationOutlined />,
+        items: [{ key: '/404', title: '404' }],
       },
     ]
 
@@ -55,18 +49,26 @@ class App extends Component {
       console.log('keyPath', { item, key, keyPath, domEvent })
     }
 
-    const menuItem = (items) => {
-      return items.map(({ key, title }) => (
-        <Menu.Item key={key}>{title}</Menu.Item>
-      ))
+    const menuItem = (baseUrl, items) => {
+      return items.map(({ key, title }) => {
+        if (baseUrl === '/') baseUrl = ''
+        let router = `${baseUrl}${key}`
+        console.log('router :>> ', router)
+        return (
+          <Menu.Item key={key}>
+            <Link to={router}>{title}</Link>
+          </Menu.Item>
+        )
+      })
     }
 
     const subMenuItems = MenuData.map(({ key, title, icon, items }) => (
       <SubMenu key={key} icon={icon} title={title}>
-        {menuItem(items)}
+        {menuItem(key, items)}
       </SubMenu>
     ))
 
+    console.log('this :>> ', this)
     return (
       <HeaderContainer>
         <Layout>
@@ -81,8 +83,8 @@ class App extends Component {
               <Menu
                 mode="inline"
                 onClick={hanldMenuClick}
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                defaultSelectedKeys={['/iconView']}
+                defaultOpenKeys={['/home']}
                 style={{ height: '100%', borderRight: 0 }}
               >
                 {subMenuItems}
@@ -102,7 +104,7 @@ class App extends Component {
                   minHeight: 280,
                 }}
               >
-                Content
+                {renderRoutes(routes)}
               </Content>
             </Layout>
           </Layout>

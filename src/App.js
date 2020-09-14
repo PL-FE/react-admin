@@ -1,13 +1,17 @@
 import React from 'react'
 import './App.css'
-import Home from '@/views/home'
+import Home from '@/components/home/index.jsx'
 
-function App() {
-  return (
-    <div className="App">
-      <Home />
-    </div>
-  )
+import { BrowserRouter } from 'react-router-dom'
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Home />
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
-
-export default App
