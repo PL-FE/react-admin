@@ -1,62 +1,36 @@
 import React, { Component } from 'react'
 import { renderRoutes } from 'react-router-config'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import routes from '@/router/index.js'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import { HeaderContainer } from './styled'
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from '@ant-design/icons'
+import MenuData from './menu.js'
 const { SubMenu } = Menu
 const { Header, Content, Sider } = Layout
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super()
-    this.BreadcrumbItems = []
+    this.state = {
+      breadcrumbItems: props.location.pathname.split('/').slice(1),
+    }
+  }
+
+  setBreadcrumbItems = (route) => {
+    this.setState({
+      breadcrumbItems: route.split('/').slice(1),
+    })
   }
 
   render() {
-    const MenuData = [
-      {
-        key: '/home',
-        title: '首页',
-        icon: <UserOutlined />,
-        items: [{ key: '/iconView', title: '图标' }],
-      },
-      {
-        key: '/components',
-        title: '组件',
-        icon: <LaptopOutlined />,
-        items: [{ key: '/ant', title: 'ant' }],
-      },
-      {
-        key: '/plugins',
-        title: '插件',
-        icon: <NotificationOutlined />,
-        items: [],
-      },
-      {
-        key: '/404',
-        title: '404',
-        icon: <NotificationOutlined />,
-        items: [{ key: '/404', title: '404' }],
-      },
-    ]
-
-    const hanldMenuClick = ({ item, key, keyPath, domEvent }) => {
-      console.log('keyPath', { item, key, keyPath, domEvent })
-    }
-
     const menuItem = (baseUrl, items) => {
       return items.map(({ key, title }) => {
         if (baseUrl === '/') baseUrl = ''
         let router = `${baseUrl}${key}`
-        console.log('router :>> ', router)
         return (
           <Menu.Item key={key}>
-            <Link to={router}>{title}</Link>
+            <Link onClick={() => this.setBreadcrumbItems(router)} to={router}>
+              {title}
+            </Link>
           </Menu.Item>
         )
       })
@@ -68,7 +42,6 @@ class App extends Component {
       </SubMenu>
     ))
 
-    console.log('this :>> ', this)
     return (
       <HeaderContainer>
         <Layout>
@@ -82,7 +55,6 @@ class App extends Component {
             <Sider width={200} className="site-layout-background">
               <Menu
                 mode="inline"
-                onClick={hanldMenuClick}
                 defaultSelectedKeys={['/iconView']}
                 defaultOpenKeys={['/home']}
                 style={{ height: '100%', borderRight: 0 }}
@@ -92,9 +64,9 @@ class App extends Component {
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>
               <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
+                {this.state.breadcrumbItems.map((it) => (
+                  <Breadcrumb.Item key={it}>{it}</Breadcrumb.Item>
+                ))}
               </Breadcrumb>
               <Content
                 className="site-layout-background"
@@ -114,4 +86,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)

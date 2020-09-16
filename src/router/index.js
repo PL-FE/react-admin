@@ -9,10 +9,10 @@ export default [
   {
     path: '/',
     exact: true,
-    render: () => <Redirect to={'/home'} />,
+    render: () => <Redirect to={'/home/iconView'} />,
   },
   {
-    path: '/home',
+    path: '/home/iconView',
     component: IconView,
   },
   {
