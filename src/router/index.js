@@ -1,27 +1,55 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-
+import {
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
+} from '@ant-design/icons'
 import NotFound from '@/components/notFound/index.jsx'
-import IconView from '@/views/iconView/index.jsx'
-import Ant from '@/views/ant/index.jsx'
+import Home from '@/views/home/index.jsx'
+import China from '@/views/home/china/index.jsx'
+import Table from '@/views/home/table/index.jsx'
+import Components from '@/views/components/index.jsx'
+import Ant from '@/views/components/ant/index.jsx'
 
 export default [
   {
     path: '/',
     exact: true,
-    render: () => <Redirect to={'/home/iconView'} />,
+    name: 'root',
+    component: () => <Redirect to={'/home/china'} />,
   },
   {
-    path: '/home/iconView',
-    component: IconView,
+    path: '/home',
+    component: Home,
+    icon: <UserOutlined />,
+    name: '首页',
+    children: [
+      { path: '/home/china', component: China, name: '中国加油 ❤' },
+      { path: '/home/table', component: Table, name: '表格' },
+    ],
   },
   {
     path: '/components',
-    component: Ant,
+    icon: <LaptopOutlined />,
+    name: '组件',
+    component: Components,
+    children: [{ path: '/components/ant', component: Ant, name: 'ant' }],
+  },
+  {
+    path: '/plugins',
+    name: 'plugins',
+    icon: <NotificationOutlined />,
+  },
+  {
+    path: '/404',
+    name: '404',
+    icon: <NotificationOutlined />,
+    component: NotFound,
   },
   {
     path: '*',
-    component: NotFound,
-    routes: [],
+    name: 'all',
+    component: () => <Redirect to={'/404'} />,
   },
 ]

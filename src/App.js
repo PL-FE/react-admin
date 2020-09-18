@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import Home from '@/components/home/index.jsx'
+import Home from '@/components/layout/index.jsx'
 
 import { BrowserRouter } from 'react-router-dom'
 

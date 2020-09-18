@@ -4,7 +4,7 @@ import { getOnsInfo } from '@/api'
 import 'echarts/map/js/china.js'
 import getOption from './option.js'
 
-export default class iconView extends Component {
+export default class china extends Component {
   constructor() {
     super()
     this.myChart = null
@@ -43,9 +43,7 @@ export default class iconView extends Component {
       <div
         style={{ width: '100%', height: '100%', backgroundColor: '#f0f2f5' }}
         ref="myEchart"
-      >
-        iconView
-      </div>
+      ></div>
     )
   }
 }
