@@ -11,12 +11,8 @@ class layout extends Component {
   constructor(props) {
     super()
     this.state = {
-      breadcrumbItems: '/home/china',
+      breadcrumbItems: props.location.pathname,
     }
-  }
-
-  componentDidMount() {
-    // this.setBreadcrumbItems('/home/china')
   }
 
   setBreadcrumbItems = (route) => {
@@ -26,7 +22,9 @@ class layout extends Component {
   }
 
   render() {
+    const breadcrumbItems = this.state.breadcrumbItems
     const menuItem = (children) => {
+      // this.setBreadcrumbItems(path)
       if (!children) return
       return children.map(({ path, name }) => {
         return (
@@ -59,7 +57,7 @@ class layout extends Component {
           <Layout>
             <Sider width={200} className="site-layout-background">
               <Menu
-                defaultSelectedKeys={['/home/china']}
+                defaultSelectedKeys={[breadcrumbItems]}
                 defaultOpenKeys={['/home']}
                 mode="inline"
                 style={{ height: '100%', borderRight: 0 }}
@@ -79,6 +77,7 @@ class layout extends Component {
                   padding: 24,
                   margin: 0,
                   minHeight: 280,
+                  overflow: 'auto',
                 }}
               >
                 {renderRoutes(routes)}

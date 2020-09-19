@@ -8,7 +8,7 @@ import {
 import NotFound from '@/components/notFound/index.jsx'
 import Home from '@/views/home/index.jsx'
 import China from '@/views/home/china/index.jsx'
-import Table from '@/views/home/table/index.jsx'
+import IconFont from '@/views/home/iconfont/index.jsx'
 import Components from '@/views/components/index.jsx'
 import Ant from '@/views/components/ant/index.jsx'
 
@@ -26,7 +26,7 @@ export default [
     name: '首页',
     children: [
       { path: '/home/china', component: China, name: '中国加油 ❤' },
-      { path: '/home/table', component: Table, name: '表格' },
+      { path: '/home/iconFont', component: IconFont, name: 'IconFont' },
     ],
   },
   {
