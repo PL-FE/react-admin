@@ -63,6 +63,7 @@
     "sass": "^1.26.10",
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
+    "sftp-sync-deploy": "^0.7.1",
     "style-loader": "0.23.1",
     "styled-components": "^5.2.0",
     "terser-webpack-plugin": "2.3.8",
@@ -76,7 +77,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "all": "node ./deploy.js"
   },
   "eslintConfig": {
     "extends": "react-app"
