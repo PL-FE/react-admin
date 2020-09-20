@@ -1,9 +1,10 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
+  FireOutlined,
+  HomeOutlined,
+  ThunderboltOutlined,
+  NumberOutlined,
 } from '@ant-design/icons'
 import NotFound from '@/components/notFound/index.jsx'
 import Home from '@/views/home/index.jsx'
@@ -22,7 +23,7 @@ export default [
   {
     path: '/home',
     component: Home,
-    icon: <UserOutlined />,
+    icon: <HomeOutlined />,
     name: '首页',
     children: [
       { path: '/home/china', component: China, name: '中国加油 ❤' },
@@ -31,7 +32,7 @@ export default [
   },
   {
     path: '/components',
-    icon: <LaptopOutlined />,
+    icon: <FireOutlined />,
     name: '组件',
     component: Components,
     children: [{ path: '/components/ant', component: Ant, name: 'ant' }],
@@ -39,12 +40,12 @@ export default [
   {
     path: '/plugins',
     name: 'plugins',
-    icon: <NotificationOutlined />,
+    icon: <ThunderboltOutlined />,
   },
   {
     path: '/404',
     name: '404',
-    icon: <NotificationOutlined />,
+    icon: <NumberOutlined />,
     component: NotFound,
   },
   {

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import echarts from 'echarts'
 import { getOnsInfo } from '@/api'
 import 'echarts/map/js/china.js'
 import getOption from './option.js'
+import ReactEcharts from 'echarts-for-react'
 
 export default class china extends Component {
   constructor() {
     super()
-    this.myChart = null
+    this.state = {
+      option: [],
+    }
   }
   componentDidMount() {
     getOnsInfo().then((onsInfo) => {
@@ -30,20 +32,24 @@ export default class china extends Component {
   }
 
   createMap = (newArr) => {
-    this.myChart = echarts.init(this.refs.myEchart)
     const option = getOption(newArr)
-    this.myChart.setOption(option, true)
+    this.setState({ option })
   }
 
-  componentWillUnmount() {
-    this.myChart = null
-  }
   render() {
     return (
-      <div
-        style={{ width: '100%', height: '100%', backgroundColor: '#f0f2f5' }}
-        ref="myEchart"
-      ></div>
+      <>
+        {this.state.option.series && (
+          <ReactEcharts
+            option={this.state.option}
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#f0f2f5',
+            }}
+          ></ReactEcharts>
+        )}
+      </>
     )
   }
 }

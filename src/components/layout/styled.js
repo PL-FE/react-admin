@@ -6,6 +6,7 @@ const HeaderContainer = styled.div`
   }
 
   .header-content {
+    user-select: none;
     color: #fff;
     span {
       color: #fff;

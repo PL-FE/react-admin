@@ -5,19 +5,28 @@ import { Link, withRouter } from 'react-router-dom'
 import routes from '@/router/index.js'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import { HeaderContainer } from './styled'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 const { SubMenu } = Menu
 const { Header, Content, Sider } = Layout
+
 class layout extends Component {
   constructor(props) {
     super()
     this.state = {
       breadcrumbItems: props.location.pathname,
+      collapsed: false,
     }
   }
 
   setBreadcrumbItems = (route) => {
     this.setState({
       breadcrumbItems: route,
+    })
+  }
+
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
     })
   }
 
@@ -50,12 +59,25 @@ class layout extends Component {
         <Layout>
           <Header className="header">
             <div className="header-content">
+              {React.createElement(
+                this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+                {
+                  onClick: this.toggle,
+                  style: { 'margin-right': '15px' },
+                }
+              )}
               <span className="logo">(ノ▽｀*)ノ[你回来啦♪]=з=з=з</span>
               <span className="user">admin</span>
             </div>
           </Header>
           <Layout>
-            <Sider width={200} className="site-layout-background">
+            <Sider
+              width={200}
+              className="site-layout-background"
+              trigger={null}
+              collapsible
+              collapsed={this.state.collapsed}
+            >
               <Menu
                 defaultSelectedKeys={[breadcrumbItems]}
                 defaultOpenKeys={['/home']}
