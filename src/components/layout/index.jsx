@@ -63,7 +63,7 @@ class layout extends Component {
                 this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
                 {
                   onClick: this.toggle,
-                  style: { 'margin-right': '15px' },
+                  style: { 'marginRight': '15px' },
                 }
               )}
               <span className="logo">(ノ▽｀*)ノ[你回来啦♪]=з=з=з</span>
