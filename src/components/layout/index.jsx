@@ -63,7 +63,7 @@ class layout extends Component {
                 this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
                 {
                   onClick: this.toggle,
-                  style: { 'marginRight': '15px' },
+                  style: { marginRight: '15px' },
                 }
               )}
               <span className="logo">(ノ▽｀*)ノ[你回来啦♪]=з=з=з</span>
@@ -96,7 +96,7 @@ class layout extends Component {
               <Content
                 className="site-layout-background"
                 style={{
-                  padding: 24,
+                  height: '100%',
                   margin: 0,
                   minHeight: 280,
                   overflow: 'auto',

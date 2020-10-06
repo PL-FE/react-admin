@@ -11,7 +11,7 @@ import Home from '@/views/home/index.jsx'
 import China from '@/views/home/china/index.jsx'
 import IconFont from '@/views/home/iconfont/index.jsx'
 import Components from '@/views/components/index.jsx'
-import Ant from '@/views/components/ant/index.jsx'
+import Table from '@/views/components/table/index.jsx'
 
 export default [
   {
@@ -35,7 +35,7 @@ export default [
     icon: <FireOutlined />,
     name: '组件',
     component: Components,
-    children: [{ path: '/components/ant', component: Ant, name: 'ant' }],
+    children: [{ path: '/components/table', component: Table, name: 'table' }],
   },
   {
     path: '/plugins',
